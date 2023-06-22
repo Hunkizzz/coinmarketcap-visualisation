@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import CryptoChart from '../chartPage/CryptoChart'; // Update the import statement
-import { Api } from '../api/Api'
+import '../static/css/styles.css'; // Import the CSS file
 
 function LeftSideMenu({ cryptoData }) {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -32,39 +32,43 @@ function LeftSideMenu({ cryptoData }) {
   };
 
   return (
-    <div>
-      <SideNav onSelect={handleSelect}>
-        <SideNav.Toggle />
-        <SideNav.Nav>
-          <NavItem eventKey="less">
-            {belowOneDollar.map((crypto) => (
-              <NavItem eventKey={`less/${crypto.name}`}>
-                <NavText>{crypto.name}</NavText>
-              </NavItem>
-            ))}
-            <NavText>Меньше 1 доллара</NavText>
-          </NavItem>
+    <div className="main-content">
+      <div className="navbar">
+        <SideNav onSelect={handleSelect} className="left-panel">
+          <SideNav.Toggle />
+          <SideNav.Nav>
+            <NavItem eventKey="less">
+              {belowOneDollar.map((crypto) => (
+                <NavItem eventKey={`less/${crypto.name}`}>
+                  <NavText>{crypto.name}</NavText>
+                </NavItem>
+              ))}
+              <NavText>Меньше 1 доллара</NavText>
+            </NavItem>
 
-          <NavItem eventKey="between">
-            {betweenOneAndHundred.map((crypto) => (
-              <NavItem eventKey={`between/${crypto.name}`}>
-                <NavText>{crypto.name}</NavText>
-              </NavItem>
-            ))}
-            <NavText>От 1 до 100</NavText>
-          </NavItem>
+            <NavItem eventKey="between">
+              {betweenOneAndHundred.map((crypto) => (
+                <NavItem eventKey={`between/${crypto.name}`}>
+                  <NavText>{crypto.name}</NavText>
+                </NavItem>
+              ))}
+              <NavText>От 1 до 100</NavText>
+            </NavItem>
 
-          <NavItem eventKey="above">
-            {aboveHundred.map((crypto) => (
-              <NavItem eventKey={`above/${crypto.name}`}>
-                <NavText>{crypto.name}</NavText>
-              </NavItem>
-            ))}
-            <NavText>Больше 100</NavText>
-          </NavItem>
-        </SideNav.Nav>
-      </SideNav>
-      {renderChartComponent()}
+            <NavItem eventKey="above">
+              {aboveHundred.map((crypto) => (
+                <NavItem eventKey={`above/${crypto.name}`}>
+                  <NavText>{crypto.name}</NavText>
+                </NavItem>
+              ))}
+              <NavText>Больше 100</NavText>
+            </NavItem>
+          </SideNav.Nav>
+        </SideNav>
+      </div>
+      <div>
+        {renderChartComponent()}
+      </div>
     </div>
   );
 }
