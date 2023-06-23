@@ -4,19 +4,19 @@ import { Api } from '../api/Api';
 
 function Layout({ children }) {
   const [cryptoData, setCryptoData] = useState([]);
+  useEffect(() => {
+    Api.getCryptoNames()
+      .then((response) => {
+        setCryptoData(response.data)
+      })
+      .catch(error => {
+        console.error('Error fetching crypto data:', error);
+      });
+  }, []);
 
-  Api.getCryptoNames()
-    .then((response) => {
-      setCryptoData(response.data)
-    })
-    .catch(error => {
-      console.error('Error fetching crypto data:', error);
-    });
-
-
-return (
-  <LeftSideMenu cryptoData={cryptoData} />
-);
+  return (
+    <LeftSideMenu cryptoData={cryptoData} />
+  );
 }
 
 export default Layout;
