@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import 'chartjs-adapter-moment';
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Api } from '../api/Api';
+import Button from 'react-bootstrap/Button';
 
 class CryptoChart extends Component {
     constructor(props) {
@@ -35,6 +36,10 @@ class CryptoChart extends Component {
                 console.log(error);
             });
     }
+
+    handleUpdate = (name) => {
+        this.fetchCryptoData(name);
+    };
 
     updateChart() {
         const { cryptoData } = this.state;
@@ -116,8 +121,17 @@ class CryptoChart extends Component {
     render() {
         return (
             <div>
-                <h2>Cryptocurrency Chart</h2>
-                <canvas ref={this.chartRef} />
+                <div>
+                    <h2>Cryptocurrency Chart</h2>
+                    <canvas ref={this.chartRef} />
+                </div>
+                <div>
+                    <>
+                        <Button variant="info" size="lg" onClick={() => this.handleUpdate(this.props.match.params.name)}>
+                            Обновить
+                        </Button>
+                    </>
+                </div>
             </div>
         );
     }
