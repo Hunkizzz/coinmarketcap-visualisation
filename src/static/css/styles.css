@@ -5,17 +5,19 @@
     position: fixed;
     left: 0;
     overflow-y: auto;
-  }
-  
-  /* Main content area */
-  .main-content {
-    margin-left: 235px; /* Adjust this value to match the width of the left panel */
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 235px;
+    /* Adjust this value to match the width of the left panel */
     padding: 10px;
-    height: 100vh; /* высота секции равна высоте области просмотра */
-  }
-  
-  /* Navbar styles */
-  .navbar {
+    height: 100vh;
+    /* высота секции равна высоте области просмотра */
+}
+
+/* Navbar styles */
+.navbar {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -23,8 +25,8 @@
     background-color: #333;
     color: #fff;
     padding: 0px;
-  }
-  
-  .navbar-item {
+}
+
+.navbar-item {
     margin-right: 10px;
-  }
+}
