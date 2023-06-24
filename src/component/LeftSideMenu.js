@@ -20,12 +20,11 @@ function LeftSideMenu({ cryptoData }) {
   };
 
   const handleSearch = (event) => {
-    setSelectedItem(null); // Clear selected item when search query changes
     setSearchQuery(event.target.value);
   };
 
   const renderChartComponent = () => {
-    if (selectedItem) {
+    if (selectedItem ) {
       const category = selectedItem.substring(0, selectedItem.indexOf('/'));
       const name = selectedItem.substring(selectedItem.indexOf('/') + 1);
       const match = {
