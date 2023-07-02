@@ -1,13 +1,17 @@
 import axios from "axios";
 
+
 export const Api = {
-    getAllCryptoCurrencies() {
-        return axios.get('http://localhost:8095/coinmarketcap/api/history/crypto');
+    getAllCryptoCurrencies(token) {
+        return axios.get('http://localhost:8095/coinmarketcap/api/history/crypto',
+            { headers: { 'Authorization': `Bearer ${token}` } });
     },
-    getSingleCryptoCurrency(name) {
-        return axios.get('http://localhost:8095/coinmarketcap/api/history/crypto/' + name);
+    getSingleCryptoCurrency(name, token) {
+        return axios.get('http://localhost:8095/coinmarketcap/api/history/crypto/' + name,
+            { headers: { 'Authorization': `Bearer ${token}` } });
     },
-    getCryptoNames() {
-        return axios.get('http://localhost:8095/coinmarketcap/api/history/crypto_currency');
+    getCryptoNames(token) {
+        return axios.get('http://localhost:8095/coinmarketcap/api/history/crypto_currency',
+            { headers: { 'Authorization': `Bearer ${token}` } });
     }
 };

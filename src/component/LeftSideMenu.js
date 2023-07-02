@@ -3,10 +3,12 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import CryptoChart from '../chartPage/CryptoChart'; // Update the import statement
 import '../static/css/styles.css'; // Import the CSS file
+import { useKeycloak } from '@react-keycloak/web';
 
 function LeftSideMenu({ cryptoData }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const {keycloak} = useKeycloak();
 
   // Categorize the crypto data into different parts
   const belowOneDollar = cryptoData.filter((crypto) => crypto.price < 1);
@@ -32,7 +34,7 @@ function LeftSideMenu({ cryptoData }) {
           name: name,
         },
       };
-      return <CryptoChart category={category} match={match} />;
+      return <CryptoChart category={category} match={match} token={keycloak.token} />;
     }
     return null;
   };

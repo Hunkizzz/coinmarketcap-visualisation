@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Menu } from 'semantic-ui-react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
+import 'semantic-ui-css/semantic.min.css';
 
 function Navbar(props) {
   const { keycloak } = useKeycloak();
@@ -20,15 +21,19 @@ function Navbar(props) {
   };
 
   return (
-    <Menu stackable>
-      <Container>
-        <Menu>
-          <Menu.Item as={NavLink} exact to="/login" onClick={handleLogInOut}>
-            {getLogInOutText()}
-          </Menu.Item>
-        </Menu>
-      </Container>
-    </Menu>
+    <div>
+      <Menu stackable>
+        <Container>
+          <Menu>
+            <Menu.Item header>Finance UI</Menu.Item>
+            <Menu.Item as={NavLink} exact to="/" onClick={handleLogInOut}>
+              {getLogInOutText()}
+            </Menu.Item>
+            <Menu.Item as={NavLink} to="/dashboard">Dashboard</Menu.Item>
+          </Menu>
+        </Container>
+      </Menu>
+    </div>
   );
 }
 

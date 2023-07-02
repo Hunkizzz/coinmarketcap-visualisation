@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Api } from '../api/Api';
 import Button from 'react-bootstrap/Button';
-
+import { useKeycloak } from '@react-keycloak/web';
 class CryptoChart extends Component {
     constructor(props) {
         super(props);
@@ -13,19 +13,20 @@ class CryptoChart extends Component {
             cryptoData: [],
         };
     }
+    
 
     componentDidMount() {
-        this.fetchCryptoData(this.props.match.params.name);
+        this.fetchCryptoData(this.props.match.params.name, this.props.token);
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.name !== this.props.match.params.name) {
-            this.fetchCryptoData(this.props.match.params.name);
+            this.fetchCryptoData(this.props.match.params.name, this.props.token);
         }
     }
 
-    fetchCryptoData(name) {
-        Api.getSingleCryptoCurrency(name)
+    fetchCryptoData(name, token) {
+        Api.getSingleCryptoCurrency(name, token)
             .then((response) => {
                 const cryptoData = response.data;
                 this.setState({ cryptoData }, () => {
@@ -37,8 +38,8 @@ class CryptoChart extends Component {
             });
     }
 
-    handleUpdate = (name) => {
-        this.fetchCryptoData(name);
+    handleUpdate = (name, token) => {
+        this.fetchCryptoData(name, token);
     };
 
     updateChart() {
@@ -127,7 +128,7 @@ class CryptoChart extends Component {
                 </div>
                 <div>
                     <>
-                        <Button variant="info" size="lg" onClick={() => this.handleUpdate(this.props.match.params.name)}>
+                        <Button variant="info" size="lg" onClick={() => this.handleUpdate(this.props.match.params.name, this.props.token)}>
                             Обновить
                         </Button>
                     </>

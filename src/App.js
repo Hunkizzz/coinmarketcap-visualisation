@@ -6,7 +6,6 @@ import Keycloak from 'keycloak-js';
 import Navbar from './component/Navbar';
 import Layout from './component/Layout';
 import { config } from './Constants';
-import Home from './component/Home';
 
 export default function App() {
   const [keycloak, setKeycloak] = useState(null);
@@ -14,7 +13,7 @@ export default function App() {
 
   useEffect(() => {
     const initKeycloak = async () => {
-      const keycloakInstance = Keycloak({
+      const keycloakInstance = new Keycloak({
         url: `${config.url.KEYCLOAK_BASE_URL}`,
         realm: 'SpringCryptoKeycloak',
         clientId: 'springboot-keycloak-client',
@@ -71,7 +70,6 @@ export default function App() {
       <ReactKeycloakProvider
         authClient={keycloak}
         initOptions={{
-          onLoad: 'check-sso',
           promiseType: 'native',
           pkceMethod: 'S256',
           checkLoginIframe: false,
@@ -82,12 +80,12 @@ export default function App() {
         <Router>
           <Navbar  authenticated={authenticated} />
           <Routes>
-            <Route path="/" element={<Home />} />
+            {/* <Route path="/" element={<Home />} /> */}
+            {/* <Route path="/dashboard" element={<Layout />} /> */}
             {authenticated && <Route path="/dashboard" element={<Layout />} />}
           </Routes>
         </Router>
       </ReactKeycloakProvider>
-      <h1>{keycloak.token}</h1>
     </div>
   );
 }
